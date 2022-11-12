@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 [RequireComponent(typeof(Animator))]
@@ -19,6 +20,8 @@ public class Player_Controller : MonoBehaviour
     [Header("MOVEMENT PARAMS")]
     public float moveSpeed = 1f;
     public float movementX;
+    public float jumpForce = 2.5f;
+    public bool doubleJump;
 
     [Space(15)]
     [Header("LAYER MASKS")]
@@ -41,6 +44,24 @@ public class Player_Controller : MonoBehaviour
     {
         // Calling the movement method
         Movement();
+
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            if (IsGrounded())
+            {
+                Jump();
+            }
+            else
+            {
+                if (Input.GetKeyDown(KeyCode.Space))
+                {
+                    if (doubleJump)
+                    {
+                        DoubleJump();
+                    }
+                }
+            }
+        }
     }
 
     /// <summary>
@@ -48,7 +69,7 @@ public class Player_Controller : MonoBehaviour
     /// </summary>
     public void GetInput()
     {
-        movementX = Input.GetAxisRaw("Horizontal");
+        movementX = Input.GetAxis("Horizontal");
     }
 
     #region PLAYER MOVEMENT & FLIP
@@ -58,11 +79,11 @@ public class Player_Controller : MonoBehaviour
     /// </summary>
     public void Movement()
     {
-        rb.velocity = new Vector2(movementX * moveSpeed, rb.velocity.y * moveSpeed);
+        rb.velocity = new Vector2(movementX * moveSpeed, rb.velocity.y);
         
         // Set animator parameters
-        anim.SetFloat("Speed", movementX);
         anim.SetBool("Walk", movementX != 0);
+        anim.SetBool("Grounded", IsGrounded());
         
         // Calling the flip method
         FlipPlayer();
@@ -95,14 +116,34 @@ public class Player_Controller : MonoBehaviour
     }
 
     /// <summary>
-    /// Method for jumpìng
+    /// Method for jumpìng only one time
     /// </summary>
     public void Jump()
     {
-        rb.velocity = new Vector2(rb.velocity.x, moveSpeed);
+        rb.velocity = new Vector2(rb.velocity.x, jumpForce);
         
         // Set animator parameters
-        anim.SetBool("Grounded", IsGrounded());
+        anim.SetTrigger("Jump");
+    }
+    
+    /// <summary>
+    /// Method for jumpìng a second time
+    /// </summary>
+    public void DoubleJump()
+    {
+        jumpForce += 0.5f;
+        rb.velocity = new Vector2(rb.velocity.x, jumpForce);
+        
+        doubleJump = false;
+    }
+
+    private void OnCollisionEnter2D(Collision2D other)
+    {
+        if (other.gameObject.CompareTag("Ground"))
+        {
+            doubleJump = true;
+            jumpForce = 2.5f;
+        }
     }
 
     #endregion
