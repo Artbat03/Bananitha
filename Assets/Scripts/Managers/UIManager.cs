@@ -67,6 +67,17 @@ public class UIManager : MonoBehaviour
 
     #region IN GAME INTERACTIONS
 
+    public void MainMenu()
+    {
+        if (SceneManager.GetActiveScene().name != "MainMenuScene")
+        {
+            HideAllPanels();
+            bananaPoints = 0;
+            SceneManager.LoadScene("MainMenuScene");
+            mainMenuPnl.SetActive(true);
+        }
+    }
+    
     public void IncreaseScore()
     {
         bananaPoints++;
