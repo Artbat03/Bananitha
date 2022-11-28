@@ -15,6 +15,9 @@ public class ToggleAudio : MonoBehaviour
     [Header("UNCHECKMARK IMAGE")]
     [SerializeField] private GameObject uncheckMark;
 
+    /// <summary>
+    /// Method for showing in UI what happens if on click the toggles for music and for SFX sounds
+    /// </summary>
     public void Toggle()
     {
         if (_toggleMusic)

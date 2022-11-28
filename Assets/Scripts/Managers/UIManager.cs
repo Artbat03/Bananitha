@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UIElements;
 
 public class UIManager : MonoBehaviour
 {
@@ -13,9 +14,17 @@ public class UIManager : MonoBehaviour
     [Header("PANELS")]
     [SerializeField] private List<GameObject> allPanels;
 
-    [SerializeField] private GameObject mainMenuPnl;
+    [SerializeField] public GameObject mainMenuPnl; // Change to private
     [SerializeField] private GameObject inGamePnl;
 
+    [Space(15)]
+    [Header("BUTTONS")]
+    [SerializeField] private AudioClip _clip;
+    [SerializeField] private GameObject _homeBtn;
+    [SerializeField] private Animator settingsAnim;
+
+    [Space (15)]
+    [Header("COLLECTIBLES PARAMS")]
     [SerializeField] private TextMeshProUGUI collectiblesTxt;
     public int bananaPoints;
     public int maxCollectibles;
@@ -31,9 +40,10 @@ public class UIManager : MonoBehaviour
         {
             Destroy(gameObject);
         }
-        
+
+        // Hiding all panels just in case we have displayed an incorrect
         HideAllPanels();
-        
+
         // Showing only the panel we want to display in awake
         mainMenuPnl.SetActive(true);
     }
@@ -41,6 +51,20 @@ public class UIManager : MonoBehaviour
     private void Update()
     {
         UpdateCollectiblesNum();
+        
+        if (SceneManager.GetActiveScene().name == "MainMenuScene")
+        {
+            StartCoroutine(Coroutine_HideShowHome());
+            _homeBtn.SetActive(false);
+            return;
+        }
+        
+        if (SceneManager.GetActiveScene().name != "MainMenuScene")
+        {
+            StartCoroutine(Coroutine_HideShowHome());
+            _homeBtn.SetActive(true);
+            return;
+        }
     }
 
     #region MAIN MENU INTERACTIONS
@@ -67,10 +91,15 @@ public class UIManager : MonoBehaviour
 
     #region IN GAME INTERACTIONS
 
+    /// <summary>
+    /// Method for going to main menu on click the Home_btn
+    /// </summary>
     public void MainMenu()
     {
         if (SceneManager.GetActiveScene().name != "MainMenuScene")
         {
+            //AudioManager.instance.PlaySound(_clip);
+
             HideAllPanels();
             bananaPoints = 0;
             SceneManager.LoadScene("MainMenuScene");
@@ -78,6 +107,9 @@ public class UIManager : MonoBehaviour
         }
     }
     
+    /// <summary>
+    /// Method for increasing the score
+    /// </summary>
     public void IncreaseScore()
     {
         bananaPoints++;
@@ -103,5 +135,10 @@ public class UIManager : MonoBehaviour
         {
             panel.SetActive(false);
         }
+    }
+
+    public IEnumerator Coroutine_HideShowHome()
+    {
+        yield return new WaitForSeconds(10f);
     }
 }

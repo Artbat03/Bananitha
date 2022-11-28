@@ -45,6 +45,8 @@ public class Player_Controller : MonoBehaviour
         // Calling the movement method
         Movement();
 
+        // If we press Space and player is grounded, he can jump
+        // If we press Space and player isn't grounded, he can press Space to make an other jump
         if (Input.GetKeyDown(KeyCode.Space))
         {
             if (IsGrounded())
@@ -65,7 +67,7 @@ public class Player_Controller : MonoBehaviour
     }
 
     /// <summary>
-    /// Method for getting the Inputs
+    /// Method for getting the movement Inputs
     /// </summary>
     public void GetInput()
     {
@@ -108,6 +110,10 @@ public class Player_Controller : MonoBehaviour
 
     #region PLAYER JUMP
 
+    /// <summary>
+    /// Method for knowing if player is touching the floor or not
+    /// </summary>
+    /// <returns>If player touches the floor, returns a non null raycast</returns>
     public bool IsGrounded()
     {
         RaycastHit2D raycastHit = Physics2D.BoxCast(boxCollider.bounds.center, boxCollider.bounds.size, 0, Vector2.down,
@@ -139,6 +145,7 @@ public class Player_Controller : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D other)
     {
+        // If player touches the Ground, he can make a double jump and the jumpForce changes
         if (other.gameObject.CompareTag("Ground"))
         {
             doubleJump = true;

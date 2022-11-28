@@ -25,21 +25,26 @@ public class AudioManager : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Method for playing the sound effect only one shot
+    /// </summary>
+    /// <param name="clip"></param>
     public void PlaySound(AudioClip clip)
     {
         _effectsSource.PlayOneShot(clip);
     }
 
-    public void ChangeMasterVolume(float value)
-    {
-        AudioListener.volume = value;
-    }
-
+    /// <summary>
+    /// Method for mute and unmute the music game
+    /// </summary>
     public void ToggleMusic()
     {
         _musicSource.mute = !_musicSource.mute;
     }
 
+    /// <summary>
+    /// Method for mute and unmute the SFX sounds
+    /// </summary>
     public void ToggleEffects()
     {
         _effectsSource.mute = !_effectsSource.mute;

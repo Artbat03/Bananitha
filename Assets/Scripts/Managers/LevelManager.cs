@@ -10,9 +10,13 @@ public class LevelManager : MonoBehaviour
 
     private void Awake()
     {
+        // Calling the method for searching the collectibles on Scene
         SearchingCollectibles();
     }
 
+    /// <summary>
+    /// Method for getting the collectibles, putting on an array and changing the maxCollectibles num of UIManager
+    /// </summary>
     public void SearchingCollectibles()
     {
         collectibles = GameObject.FindGameObjectsWithTag("Collectible");
