@@ -21,8 +21,7 @@ public class UIManager : MonoBehaviour
     [Header("BUTTONS")]
     [SerializeField] private AudioClip _clip;
     [SerializeField] private GameObject _homeBtn;
-    [SerializeField] private Animator settingsAnim;
-
+    
     [Space (15)]
     [Header("COLLECTIBLES PARAMS")]
     [SerializeField] private TextMeshProUGUI collectiblesTxt;

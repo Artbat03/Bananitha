@@ -1981,7 +1981,7 @@ MonoBehaviour:
   onValueChanged:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 113064927}
+      - m_Target: {fileID: 1181606368}
         m_TargetAssemblyTypeName: ToggleAudio, Assembly-CSharp
         m_MethodName: Toggle
         m_Mode: 1
@@ -2631,7 +2631,6 @@ MonoBehaviour:
   inGamePnl: {fileID: 767330659}
   _clip: {fileID: 0}
   _homeBtn: {fileID: 256604728}
-  settingsAnim: {fileID: 1510135933}
   collectiblesTxt: {fileID: 1684922119}
   bananaPoints: 0
   maxCollectibles: 0
