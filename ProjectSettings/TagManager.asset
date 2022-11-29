@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Ground
   - Collectible
+  - Spike
   layers:
   - Default
   - TransparentFX
@@ -15,8 +16,8 @@ TagManager:
   - UI
   - Ground
   - Walls
-  - Player
   - Enemy
+  - Player
   - 
   - 
   - 
@@ -51,6 +52,9 @@ TagManager:
     locked: 0
   - name: Ground
     uniqueID: 1119812033
+    locked: 0
+  - name: Enemy
+    uniqueID: 3303468517
     locked: 0
   - name: Player
     uniqueID: 2000076681

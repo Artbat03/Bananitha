@@ -8,6 +8,7 @@ public class CheckpointFlag : MonoBehaviour
 {
     // Variables
     [SerializeField] private Animator anim;
+    [SerializeField] private AudioClip checkpointSFX;
 
     private void Awake()
     {
@@ -24,13 +25,8 @@ public class CheckpointFlag : MonoBehaviour
             if (UIManager.instance.bananaPoints == UIManager.instance.maxCollectibles)
             {
                 anim.SetTrigger("AllCollected");
-                
+                AudioManager.instance.PlaySound(checkpointSFX);
             }
-            /* Logic if player die
-            else if ()
-            {
-                
-            }*/
         }
     }
     
@@ -46,7 +42,8 @@ public class CheckpointFlag : MonoBehaviour
             // Delete this lines before
             UIManager.instance.HideAllPanels();
             UIManager.instance.mainMenuPnl.SetActive(true);
-            
+            HealthBar.instance.currentHealth.value = 3;
+
             // SceneManager.LoadScene("SceneLevel_2");
         }/*
         else if (SceneManager.GetActiveScene().name == "SceneLevel_2")
@@ -58,7 +55,10 @@ public class CheckpointFlag : MonoBehaviour
             Time.timeScale = 0;
 
             UIManager.instance.HideAllPanels();
+            
             // Show the panel I want
+            UIManager.instance.winPnl.SetActive(true);
+            HealthBar.instance.currentHealth.value = 3;
         }*/
     }
 

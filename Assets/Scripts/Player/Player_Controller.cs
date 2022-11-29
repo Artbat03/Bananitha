@@ -12,26 +12,34 @@ public class Player_Controller : MonoBehaviour
 {
     // Variables
     [Header("COMPONENTS")]
-    public Animator anim;
-    public Rigidbody2D rb;
-    public BoxCollider2D boxCollider;
+    [SerializeField] private Animator anim;
+    [SerializeField] private Rigidbody2D rb;
+    [SerializeField] private BoxCollider2D boxCollider;
+    [SerializeField] private HealthManager healthManager;
 
     [Space(15)]
     [Header("MOVEMENT PARAMS")]
-    public float moveSpeed = 1f;
-    public float movementX;
-    public float jumpForce = 2.5f;
-    public bool doubleJump;
+    [SerializeField] private float moveSpeed = 1f;
+    [SerializeField] private float movementX;
+    [SerializeField] private float jumpForce = 2.5f;
+    [SerializeField] private bool doubleJump;
 
     [Space(15)]
     [Header("LAYER MASKS")]
-    public LayerMask groundLayer;
+    [SerializeField] private LayerMask groundLayer;
+
+    [Space(15)]
+    [Header("AUDIO CLIPS")]
+    [SerializeField] private AudioClip jumpSFX;
+    [SerializeField] private AudioClip damagedSFX;
 
     void Awake()
     {
+        // Getting the necessary components
         anim = GetComponent<Animator>();
         rb = GetComponent<Rigidbody2D>();
         boxCollider = GetComponent<BoxCollider2D>();
+        healthManager = GetComponent<HealthManager>();
     }
 
     private void FixedUpdate()
@@ -49,6 +57,8 @@ public class Player_Controller : MonoBehaviour
         // If we press Space and player isn't grounded, he can press Space to make an other jump
         if (Input.GetKeyDown(KeyCode.Space))
         {
+            AudioManager.instance.PlaySound(jumpSFX);
+            
             if (IsGrounded())
             {
                 Jump();
@@ -82,11 +92,11 @@ public class Player_Controller : MonoBehaviour
     public void Movement()
     {
         rb.velocity = new Vector2(movementX * moveSpeed, rb.velocity.y);
-        
+
         // Set animator parameters
         anim.SetBool("Walk", movementX != 0);
         anim.SetBool("Grounded", IsGrounded());
-        
+
         // Calling the flip method
         FlipPlayer();
     }
@@ -154,4 +164,16 @@ public class Player_Controller : MonoBehaviour
     }
 
     #endregion
+    
+    private void OnTriggerEnter2D(Collider2D other)
+    {
+        // If player triggers with tag Spike, plays the damaged SFX
+        if (other.gameObject.CompareTag("Spike"))
+        {
+            if (healthManager.actualHealth != 0)
+            {
+                AudioManager.instance.PlaySound(damagedSFX);
+            }
+        }
+    }
 }

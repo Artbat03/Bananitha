@@ -16,10 +16,10 @@ public class UIManager : MonoBehaviour
 
     [SerializeField] public GameObject mainMenuPnl; // Change to private
     [SerializeField] private GameObject inGamePnl;
+    [SerializeField] private GameObject winPnl;
 
     [Space(15)]
     [Header("BUTTONS")]
-    [SerializeField] private AudioClip _clip;
     [SerializeField] private GameObject _homeBtn;
     
     [Space (15)]
@@ -62,6 +62,7 @@ public class UIManager : MonoBehaviour
         {
             StartCoroutine(Coroutine_HideShowHome());
             _homeBtn.SetActive(true);
+            HealthBar.instance.healthManager = GameObject.FindGameObjectWithTag("Player").GetComponent<HealthManager>();
             return;
         }
     }

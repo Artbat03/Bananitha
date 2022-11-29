@@ -2,13 +2,14 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class AudioManager : MonoBehaviour
 {
     // Variables
     public static AudioManager instance;
 
-    [Header("AUDIOSOURCES")]
+    [Header("AUDIO SOURCES")]
     [SerializeField] private AudioSource _musicSource;
     [SerializeField] private AudioSource _effectsSource;
     
@@ -24,14 +25,23 @@ public class AudioManager : MonoBehaviour
             Destroy(gameObject);
         }
     }
-
+    
     /// <summary>
     /// Method for playing the sound effect only one shot
     /// </summary>
-    /// <param name="clip"></param>
+    /// <param name="clip">The clip to play</param>
     public void PlaySound(AudioClip clip)
     {
         _effectsSource.PlayOneShot(clip);
+    }
+    
+    /// <summary>
+    /// Method for playing the sound effect only one shot
+    /// </summary>
+    /// <param name="clip">The clip to play</param>
+    public void StopSound()
+    {
+        _effectsSource.Stop();
     }
 
     /// <summary>
