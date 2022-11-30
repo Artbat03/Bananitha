@@ -2860,7 +2860,7 @@ MonoBehaviour:
   - {fileID: 767330659}
   mainMenuPnl: {fileID: 253426747}
   inGamePnl: {fileID: 767330659}
-  _clip: {fileID: 0}
+  winPnl: {fileID: 0}
   _homeBtn: {fileID: 256604728}
   collectiblesTxt: {fileID: 1684922119}
   bananaPoints: 0

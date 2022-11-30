@@ -8,6 +8,8 @@ public class GameManager : MonoBehaviour
     // Variables
     public static GameManager instance;
 
+    public int healthPlayer = 3;
+
     private void Awake()
     {
         if (instance == null)

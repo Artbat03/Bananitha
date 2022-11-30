@@ -26,6 +26,7 @@ public class HealthManager : MonoBehaviour
     {
         actualHealth -= value;
         HealthBar.instance.currentHealth.value = actualHealth;
+        GameManager.instance.healthPlayer = actualHealth;
 
         if (actualHealth == 0)
         {

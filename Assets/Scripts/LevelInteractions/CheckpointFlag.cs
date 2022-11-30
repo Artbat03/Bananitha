@@ -36,20 +36,22 @@ public class CheckpointFlag : MonoBehaviour
         
         if (SceneManager.GetActiveScene().name == "SceneLevel_1")
         {
-            SceneManager.LoadScene("MainMenuScene");
             UIManager.instance.bananaPoints = 0;
             
+            SceneManager.LoadScene("SceneLevel_2");
+        }
+        else if (SceneManager.GetActiveScene().name == "SceneLevel_2")
+        {
+            SceneManager.LoadScene("MainMenuScene");
+            UIManager.instance.bananaPoints = 0;
+        
             // Delete this lines before
             UIManager.instance.HideAllPanels();
             UIManager.instance.mainMenuPnl.SetActive(true);
             HealthBar.instance.currentHealth.value = 3;
-
-            // SceneManager.LoadScene("SceneLevel_2");
+            
+            //SceneManager.LoadScene("SceneLevel_3");
         }/*
-        else if (SceneManager.GetActiveScene().name == "SceneLevel_2")
-        {
-            SceneManager.LoadScene("SceneLevel_3");
-        }
         else if (SceneManager.GetActiveScene().name == "SceneLevel_3")
         {
             Time.timeScale = 0;

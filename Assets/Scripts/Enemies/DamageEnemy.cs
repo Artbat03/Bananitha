@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SpikeEnemy : MonoBehaviour
+public class DamageEnemy : MonoBehaviour
 {
     // Variables
     [SerializeField] private int damage = 1;

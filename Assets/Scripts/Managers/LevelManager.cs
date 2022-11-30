@@ -7,11 +7,18 @@ public class LevelManager : MonoBehaviour
 {
     // Variables
     [SerializeField] private GameObject[] collectibles;
+    [SerializeField] private HealthManager playerHealth;
 
     private void Awake()
     {
         // Calling the method for searching the collectibles on Scene
         SearchingCollectibles();
+    }
+
+    private void Start()
+    {
+        playerHealth = GameObject.FindGameObjectWithTag("Player").GetComponent<HealthManager>();
+        playerHealth.actualHealth = GameManager.instance.healthPlayer;
     }
 
     /// <summary>

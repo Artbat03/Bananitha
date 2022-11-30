@@ -168,7 +168,7 @@ public class Player_Controller : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D other)
     {
         // If player triggers with tag Spike, plays the damaged SFX
-        if (other.gameObject.CompareTag("Spike"))
+        if (other.gameObject.CompareTag("Spike") || other.gameObject.CompareTag("HorizontalEnemy") || other.gameObject.CompareTag("DiagonalEnemy"))
         {
             if (healthManager.actualHealth != 0)
             {
