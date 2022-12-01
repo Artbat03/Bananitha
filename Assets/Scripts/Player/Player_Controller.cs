@@ -168,9 +168,10 @@ public class Player_Controller : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D other)
     {
         // If player triggers with tag Spike, plays the damaged SFX
-        if (other.gameObject.CompareTag("Spike") || other.gameObject.CompareTag("HorizontalEnemy") || other.gameObject.CompareTag("DiagonalEnemy"))
+        if (other.gameObject.CompareTag("Spike") || other.gameObject.CompareTag("HorizontalEnemy") ||
+            other.gameObject.CompareTag("DiagonalEnemy") || other.gameObject.CompareTag("VerticalEnemy"))
         {
-            if (healthManager.actualHealth != 0)
+            if (healthManager.actualHealth >= 0)
             {
                 AudioManager.instance.PlaySound(damagedSFX);
             }

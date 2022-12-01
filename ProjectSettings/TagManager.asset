@@ -9,6 +9,7 @@ TagManager:
   - Spike
   - HorizontalEnemy
   - DiagonalEnemy
+  - VerticalEnemy
   layers:
   - Default
   - TransparentFX

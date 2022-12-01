@@ -16,7 +16,7 @@ public class UIManager : MonoBehaviour
 
     [SerializeField] public GameObject mainMenuPnl; // Change to private
     [SerializeField] private GameObject inGamePnl;
-    [SerializeField] private GameObject winPnl;
+    public GameObject winPnl;
 
     [Space(15)]
     [Header("BUTTONS")]
@@ -76,6 +76,18 @@ public class UIManager : MonoBehaviour
     {
         HideAllPanels();
         SceneManager.LoadScene("SceneLevel_1");
+        inGamePnl.SetActive(true);
+    }
+
+    /// <summary>
+    /// Method for restarting the game when on click the Restart_btn
+    /// </summary>
+    public void Restart()
+    {
+        SceneManager.LoadScene("SceneLevel_1");
+
+        StartCoroutine(Coroutine_HideShowHome());
+        HideAllPanels();
         inGamePnl.SetActive(true);
     }
 

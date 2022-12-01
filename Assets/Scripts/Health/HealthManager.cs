@@ -28,11 +28,12 @@ public class HealthManager : MonoBehaviour
         HealthBar.instance.currentHealth.value = actualHealth;
         GameManager.instance.healthPlayer = actualHealth;
 
-        if (actualHealth == 0)
+        if (actualHealth <= 0)
         {
             // Reset bananaPoints and health
             UIManager.instance.bananaPoints = 0;
             HealthBar.instance.currentHealth.value = initialHealth;
+            GameManager.instance.healthPlayer = initialHealth;
             
             // Play death sound
             AudioManager.instance.PlaySound(deathSFX);
