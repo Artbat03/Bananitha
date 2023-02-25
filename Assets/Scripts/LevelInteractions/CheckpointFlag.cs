@@ -34,23 +34,19 @@ public class CheckpointFlag : MonoBehaviour
         }
     }
     
+    /// <summary>
+    /// Method for activating the transition gameObject
+    /// </summary>
     public void ChangeScene()
     {
-        StartCoroutine(Coroutine_NextLevel());
-        
-        if (SceneManager.GetActiveScene().name == "SceneLevel_1")
+        if (SceneManager.GetActiveScene().name != "SceneLevel_3")
         {
-            UIManager.instance.bananaPoints = 0;
-            
-            SceneManager.LoadScene("SceneLevel_2");
-        }
-        else if (SceneManager.GetActiveScene().name == "SceneLevel_2")
-        {
-            UIManager.instance.bananaPoints = 0;
+            GameManager.instance.transitionGO.SetActive(true);
 
-            SceneManager.LoadScene("SceneLevel_3");
-        }
-        else if (SceneManager.GetActiveScene().name == "SceneLevel_3")
+            AudioManager.instance.PlaySound(GameManager.instance.transitionClip);
+        } 
+        
+        if (SceneManager.GetActiveScene().name == "SceneLevel_3")
         {
             UIManager.instance.bananaPoints = 0;
 
@@ -62,14 +58,5 @@ public class CheckpointFlag : MonoBehaviour
             
             HealthBar.instance.currentHealth.value = 3;
         }
-    }
-
-    /// <summary>
-    /// Coroutine for loading next scene
-    /// </summary>
-    /// <returns></returns>
-    public IEnumerator Coroutine_NextLevel()
-    {
-        yield return new WaitForSeconds(5f);
     }
 }
